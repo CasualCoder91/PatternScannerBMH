@@ -26,7 +26,7 @@ HANDLE getHande(const char* proc) {
     return 0;
 }
 
-uintptr_t bruteForce(ScanData& signature, ScanData& data) {
+uintptr_t bruteForce(const ScanData& signature, const ScanData& data) {
     for (size_t currentIndex = 0; currentIndex < data.size - signature.size; currentIndex++) {
         for (size_t sigIndex = 0; sigIndex < signature.size; sigIndex++) {
             if (data.data[currentIndex + sigIndex] != signature.data[sigIndex] && signature.data[sigIndex] != '?') {
@@ -40,7 +40,7 @@ uintptr_t bruteForce(ScanData& signature, ScanData& data) {
     return 0;
 }
 
-uintptr_t boyerMooreHorspool(ScanData& signature, ScanData& data) {
+uintptr_t boyerMooreHorspool(const ScanData& signature, const ScanData& data) {
     //get last '?' position in pattern and use it to calculate the max shift value.
     //the last position in the pattern should never be a '?' -> we do not bother checking it
     size_t maxShift = signature.size;
@@ -106,9 +106,7 @@ int main() {
     }
 
     ScanData signature = ScanData("69 f6 ? ? ? ? 8a 44 24 10 03 F1 "); //add more bytes here if possible
-
     //signature.print();
-
 
     ScanData data = ScanData(2135809); // amout of bytes to read
     uintptr_t start = 0x5151C1;
