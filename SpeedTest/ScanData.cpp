@@ -34,7 +34,7 @@ ScanData::ScanData(std::string input) {
 
 ScanData::~ScanData()
 {
-	delete (data);
+	delete[] data;
 }
 
 void ScanData::print() {
